@@ -20,3 +20,36 @@ rules:
     steps:
       - intent: bot_challenge
       - action: utter_iamabot
+  
+  - rule: Activate form
+    steps:
+    - intent: request_country
+    - action : country_form
+    - active_loop: country_form
+
+  - rule: Submit form
+    condition:
+    # Condition that form is active.
+    - active_loop: restaurant_form
+    steps:
+    # Form is deactivated
+    - action: restaurant_form
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    # The actions we want to run when the form is submitted.
+    - action: utter_submit
+    - action: utter_slots_values
+      
+  - rule: Example of an unhappy path
+    condition:
+    # Condition that form is active.
+    - active_loop: country_form
+    steps:
+    # This unhappy path handles the case of an intent `chitchat`.
+    - intent: chitchat
+    - action: utter_chitchat
+    # Return to form after handling the `chitchat` intent
+    - action: country_form
+    - active_loop: country_form
+

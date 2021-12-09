@@ -28,3 +28,14 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: User interrupts the form and doesn't want to continue #Unhappypath
+  steps:
+  - intent: request_country
+  - action: country_form
+  - active_loop: country_form
+  - intent: stop
+  - action: utter_ask_continue
+  - intent: stop
+  - action: action_deactivate_loop
+  - active_loop: null

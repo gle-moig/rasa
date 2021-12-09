@@ -1,5 +1,14 @@
 version: "3.0"
 
+entities:
+-county #ask the user for the county he wants to visit
+
+slots:
+  country:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: country
 intents:
   - chitchat
   - greet
@@ -42,9 +51,13 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
 forms:
-  capital_form:
+  country_form:
+    ignored_intents:
+    - chitchat
     required_slots:
-      - capital
+      - country
+actions:
+- validate_country_form
 
 session_config:
   session_expiration_time: 60
