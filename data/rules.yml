@@ -1,55 +1,54 @@
 version: "3.0"
 
 rules:
-  - rule: respond to FAQs
-    steps:
-      - intent: faq
-      - action: utter_faq
-
-  - rule: respond to chitchat
-    steps:
-      - intent: chitchat
-      - action: utter_chitchat
-
   - rule: Say goodbye anytime the user says goodbye
     steps:
-      - intent: goodbye
-      - action: utter_goodbye
-
+    - intent: goodbye
+    - action: utter_goodbye
+  - rule: respond to chitchat
+    steps:
+    - intent: chitchat
+    - action: utter_chitchat
   - rule: Say 'I am a bot' anytime the user challenges
     steps:
-      - intent: bot_challenge
-      - action: utter_iamabot
-  
+    - intent: bot_challenge
+    - action: utter_iamabot
   - rule: Activate form
     steps:
-    - intent: request_country
+    - intent: greet
+    - action: utter_greet
     - action : country_form
     - active_loop: country_form
-
   - rule: Submit form
     condition:
-    # Condition that form is active.
-    - active_loop: restaurant_form
+    - active_loop: country_form
     steps:
-    # Form is deactivated
-    - action: restaurant_form
+    - action: country_form
     - active_loop: null
     - slot_was_set:
       - requested_slot: null
-    # The actions we want to run when the form is submitted.
     - action: utter_submit
-    - action: utter_slots_values
-      
-  - rule: Example of an unhappy path
+  - rule: Unhappy path 1
     condition:
-    # Condition that form is active.
     - active_loop: country_form
     steps:
-    # This unhappy path handles the case of an intent `chitchat`.
     - intent: chitchat
     - action: utter_chitchat
-    # Return to form after handling the `chitchat` intent
     - action: country_form
     - active_loop: country_form
-
+  - rule: Unhappy path 2
+    condition:
+    - active_loop: country_form
+    steps:
+    - intent: help
+    - action: utter_help
+    - action: country_form
+    - active_loop: country_form
+  - rule: Unhappy path 3
+    condition:
+    - active_loop: country_form
+    steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+    - action: country_form
+    - active_loop: country_form

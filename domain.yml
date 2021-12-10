@@ -1,7 +1,18 @@
 version: "3.0"
 
+intents:
+- greet
+- help
+- everything
+- affirm
+- deny
+- chitchat
+- bot_challenge
+- goodbye
+
 entities:
--county #ask the user for the county he wants to visit
+- country
+- informations
 
 slots:
   country:
@@ -9,46 +20,31 @@ slots:
     mappings:
     - type: from_entity
       entity: country
-intents:
-  - chitchat
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  informations:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: informations
 
 responses:
-  utter_faq:
-    - text: faq blabla
-  utter_chitchat/ask_name:
-  - image: "https://i.imgur.com/zTvA58i.jpeg"
-    text: Hello, my name is Retrieval Bot.
-  - text: I am called Retrieval Bot!
-
-  utter_chitchat/ask_weather:
-  - text: Oh, it does look sunny right now in Berlin.
-    image: "https://i.imgur.com/vwv7aHN.png"
-
   utter_greet:
   - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  utter_help:
+  - text: "I am a bot that can provide you intelligence over countries, such as population, currency, ..."
+  utter_ask_country:
+  - text: "What country do you want information about?"
+  utter_ask_information:
+  - text: "What information do you want?"
+  utter_submit:
+  - text: "About {country}, I can tell {informations}"
+  utter_chitchat/ask_name:
+  - text: "I am the bot, nice to meet ya!"
   utter_did_that_help:
   - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+  utter_goodbye:
+  - text: "Bye"
 
 forms:
   country_form:
@@ -56,9 +52,7 @@ forms:
     - chitchat
     required_slots:
       - country
+      - informations
+
 actions:
 - validate_country_form
-
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
