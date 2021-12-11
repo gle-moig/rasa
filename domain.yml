@@ -2,6 +2,7 @@ version: "3.0"
 
 intents:
 - greet
+- ask
 - help
 - everything
 - affirm
@@ -28,7 +29,7 @@ slots:
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hey!"
   utter_help:
   - text: "I am a bot that can provide you intelligence over countries, such as population, currency, ..."
   utter_ask_country:

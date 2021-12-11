@@ -1,6 +1,19 @@
 version: "3.0"
 
 nlu:
+- lookup: country
+  examples: |
+    - France
+    - China
+    - Germany
+    - UK
+    - Mozambique
+    - Japan
+- lookup: informations
+  examples: |
+    - currency
+    - population
+    - capital city
 - intent: greet
   examples: |
     - hey
@@ -16,6 +29,12 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+- intent: ask
+  examples: |
+    - I would like some information about [France]{"entity": "country"}
+    - Can you tell me about [Germany]{"entity": "country"}
+    - What [language]{"entity": "informations"} is spoken in [China]{"entity": "country"}
+    - How many [people]{"entity": "informations"} live in  the [USA]{"entity": "country"}
 - intent: help
   examples: |
     - How do I use you?

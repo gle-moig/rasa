@@ -13,10 +13,13 @@ rules:
     steps:
     - intent: bot_challenge
     - action: utter_iamabot
-  - rule: Activate form
+  - rule: greet
     steps:
     - intent: greet
     - action: utter_greet
+  - rule: activate form
+    steps:
+    - intent: ask
     - action : country_form
     - active_loop: country_form
   - rule: Submit form

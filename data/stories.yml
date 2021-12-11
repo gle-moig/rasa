@@ -5,12 +5,15 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - intent: ask
   - action: country_form
   - active_loop: country_form
   - slot_was_set:
     - requested_slot: country
   - slot_was_set:
     - requested_slot: informations
+  - active_loop: null
   - action: utter_submit
   - intent: goodbye
   - action: utter_goodbye
+

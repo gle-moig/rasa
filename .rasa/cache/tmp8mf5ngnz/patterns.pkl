@@ -1,0 +1,10 @@
+[
+  {
+    "name": "country",
+    "pattern": "(\\bFrance\\b|\\bChina\\b|\\bGermany\\b|\\bUK\\b|\\bMozambique\\b|\\bJapan\\b)"
+  },
+  {
+    "name": "informations",
+    "pattern": "(\\bcurrency\\b|\\bpopulation\\b|\\bcapital\\ city\\b)"
+  }
+]
